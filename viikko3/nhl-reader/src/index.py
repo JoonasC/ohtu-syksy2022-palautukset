@@ -21,9 +21,8 @@ def main():
         players.append(player)
 
     print("Statistics for Finnish players:")
-    for player in players:
-        if player.nationality == "FIN":
-            print(player)
+    for player in sorted(filter(lambda player: player.nationality == "FIN", players), reverse=True, key=lambda player: player.get_score()):
+        print(player)
 
 if __name__ == "__main__":
     main()
