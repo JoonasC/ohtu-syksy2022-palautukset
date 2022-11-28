@@ -30,8 +30,7 @@ class Ostoskori:
                 olemassaoleva_ostos.muuta_lukumaaraa(-1)
 
     def tyhjenna(self):
-        pass
-        # tyhjentää ostoskorin
+        self._ostokset.clear()
 
     def ostokset(self):
         return self._ostokset
