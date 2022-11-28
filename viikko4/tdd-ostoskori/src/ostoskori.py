@@ -7,14 +7,18 @@ class Ostoskori:
         self.ostokset = []
 
     def tavaroita_korissa(self):
-        return reduce(lambda acc, ostos: (acc + ostos.lukumaara()), self.ostokset) if len(self.ostokset) > 0 else 0
+        return reduce(lambda acc, ostos: (acc + ostos.lukumaara()), self.ostokset, 0)
 
     def hinta(self):
-        return reduce(lambda acc, ostos: (acc + ostos.hinta()), self.ostokset) if len(self.ostokset) > 0 else 0
+        return reduce(lambda acc, ostos: (acc + ostos.hinta()), self.ostokset, 0)
 
     def lisaa_tuote(self, lisattava: Tuote):
-        # lisää tuotteen
-        pass
+        olemassaoleva_ostos = next((ostos for ostos in self.ostokset if ostos.tuotteen_nimi() == lisattava.nimi()), None)
+
+        if olemassaoleva_ostos:
+            olemassaoleva_ostos.muuta_lukumaaraa(1)
+        else:
+            self.ostokset.append(Ostos(lisattava))
 
     def poista_tuote(self, poistettava: Tuote):
         # poistaa tuotteen
